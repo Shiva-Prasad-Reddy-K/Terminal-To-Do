@@ -32,6 +32,23 @@ program.command('done')
         }
     })
 
+program.command('remove')
+    .description('Remove a task from the list')
 
+
+
+program.command('edit')
+    .description("Edit an existing task from the list")
+
+
+program.command('list')
+    .description('List all the tasks in the todo list')
+    // .option('-p, --pending', "list only the pending tasks")
+    // .option('--all', "list all the tasks for the day")
+    .action((str, options) => {
+        for(let i = 0; i < contents.length; i++){
+            console.log(contents[i].task)
+        }
+    });
 
 program.parse();
