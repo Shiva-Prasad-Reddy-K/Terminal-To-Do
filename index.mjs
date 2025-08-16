@@ -13,4 +13,15 @@ program.command('add')
         fs.writeFileSync("tasks.txt", JSON.stringify(contents), {encoding: 'utf8'})
     })
 
+
+program.command('list')
+    .description('List all the tasks in the todo list')
+    .option('-p, --pending', "list only the pending tasks")
+    .option('--all', "list all the tasks for the day")
+    .action((options) => {
+        for(let i = 0; i < contents.length; i++){
+            console.log(contents[i].task)
+        }
+    });
+
 program.parse();
