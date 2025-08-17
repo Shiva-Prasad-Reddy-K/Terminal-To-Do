@@ -26,21 +26,5 @@ First, clone this repository to your local machine using Git.
 git clone [https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git)
 
 ### 2. Navigate to the Project Directory
-Bash
-
+```bash
 cd YOUR_REPOSITORY_NAME
-### 3. Install Dependencies
-Install the necessary npm packages defined in package.json.
-
-Bash
-
-npm install
-
-### 4. Make the Command Global
-To use the todo command from anywhere in your terminal, create a symbolic link using npm.
-
-Bash
-
-npm link
-
-This will make your CLI tool globally available on your system, so you can call it just by typing todo.
