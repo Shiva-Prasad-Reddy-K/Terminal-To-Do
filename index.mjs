@@ -5,6 +5,19 @@ import fs from 'fs';
 const program = new Command();
 let contents = JSON.parse(fs.readFileSync('tasks.txt', 'utf-8'))
 
+function rearrange() {
+    let p = 0;
+    for(let i = 0; i < contents.length; i ++) {
+        if (contents[i].status == true) {
+            let temp = contents[i]
+            contents[i] = contents[p]
+            contents[p] = temp
+            p ++
+        };
+    };
+};
+
+
 program.command('add')
     .description('Add a task into the list')
     .argument('<string>', "Task to add")
@@ -12,6 +25,7 @@ program.command('add')
         contents.push({task: str, status: true})
         fs.writeFileSync("tasks.txt", JSON.stringify(contents), {encoding: 'utf8'})
         console.log(chalk.green.bold('Task added to the list'))
+        rearrange()
     })
 
 program.command('done')
@@ -23,17 +37,32 @@ program.command('done')
             if (str === contents[i].task) {
                 contents[i].status = false;
                 found = true;
-                console.log(chalk.green('Task marked as done'))
+                console.log(chalk.green('Task marked as done'));
                 break;
             }
         }
         if(!found) {
-            console.log(chalk.red("Ther is no such task"))
+            console.log(chalk.red("Ther is no such task"));
         }
+        rearrange();
     })
 
 program.command('remove')
     .description('Remove a task from the list')
+    .argument('<string>', 'Task that needs to be removed')
+    .action((str) => {
+        found = false
+        for(let i = 0; i < contents.lenght; i++) {
+            if (contents[i].task == str) {
+                contents.splice(i, 1);
+                found = true;
+                break;
+            }
+        }
+        if (found == false) {
+            console.log(chalk.red.bold("No such task found in the list"));
+        }
+    })
 
 
 
