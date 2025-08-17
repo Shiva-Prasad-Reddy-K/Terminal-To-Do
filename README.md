@@ -21,49 +21,133 @@ A simple, fast, and elegant command-line to-do list application to manage your t
 You'll need [Node.js](https://nodejs.org/) and `npm` installed on your machine.
 
 1. **Clone the Repository**
+First, clone this repository to your local machine using Git.
+```bash
+git clone https://github.com/Shiva-Prasad-Reddy-K/Terminal-To-Do.git
+```
 
 
 2. **Navigate to the Project Directory**
 
 
 3. **Install Dependencies**
+Install the necessary npm packages defined in ```package.json```.
+```bash
+npm install
+```
 
 
 4. **Make the Command Global**
+To use the ```todo``` command from anywhere in your terminal, create a symbolic link using npm.
+```bash
+npm link
+```
 
-
-Now you can simply run the app using:
+This will make your CLI tool globally available on your system, so you can call it just by typing ```todo```.
 
 
 ---
 
 ## 📖 Usage & Commands
+Here's a complete guide to all the available commands.
 
 ### ➕ Add a Task
+```add```
 Adds a new task to your to-do list. The task is stored as pending.  
+
+###Command:
+```bash
+todo add "<your task description>"
+```
+
+###Example:
+```bash
+todo add "Create a README file for my project"
+```
 
 
 ### 📋 List All Tasks
+```list```
 Displays all tasks in your list.  
 Completed tasks will appear **dimmed** and **struck through**.  
+
+###Command:
+```bash
+todo list
+```
+
+###Example Output:
+```
+1. Create a README file for my project
+2. ~~Push the project to GitHub~~
+```
 
 
 ### ✔️ Mark as Done
 Marks an existing task as completed.  
 
+###Command:
+```bash
+todo done "<task to mark as done>"
+```
+###Example:
+```bash
+todo done "Create a README file for my project"
+```
+
+
 
 ### ✏️ Edit a Task
 Edits the description of an existing task.  
 
+###Command:
+```bash
+todo edit "<old task description>" "<new task description>"
+```
+
+###Example:
+```bash
+todo edit "Create a README file" "Create a beautiful README file"
+```
+
+
 
 ### 🗑️ Remove Tasks
+Removes tasks from your list. This command is very flexible and has several options.
+
 Remove a specific task:
+
+###Command:
+```bash
+todo remove "<task to remove>"
+```
+
+###Example:
+```bash
+todo remove "Old task I don't need"
+```
+
 
 
 Remove all **completed tasks**:
+Use the ```-d``` or ```--done``` flag to clean up your list by removing all completed tasks
+
+###Command:
+```bash
+todo remove -d
+```
+or 
+
+```bash
+todo remove --done
+```
+
 
 
 Remove **all tasks** (careful!):
+Use the ```-a``` or ```--all``` flag to completely wipe your to-do list. Use with caution!
+
+
 ```bash
 todo remove -a
 ```
@@ -95,7 +179,3 @@ If you have ideas for new features or find a bug, please open an issue or submit
 5. Open a Pull Request  
 
 ---
-
-## 📄 License
-
-This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
