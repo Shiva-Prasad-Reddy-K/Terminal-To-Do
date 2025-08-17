@@ -55,12 +55,12 @@ Here's a complete guide to all the available commands.
 ```add```
 Adds a new task to your to-do list. The task is stored as pending.  
 
-###Command:
+**Command**:
 ```bash
 todo add "<your task description>"
 ```
 
-###Example:
+**Example**:
 ```bash
 todo add "Create a README file for my project"
 ```
@@ -71,12 +71,12 @@ todo add "Create a README file for my project"
 Displays all tasks in your list.  
 Completed tasks will appear **dimmed** and **struck through**.  
 
-###Command:
+**Command**:
 ```bash
 todo list
 ```
 
-###Example Output:
+**Example Output**:
 ```
 1. Create a README file for my project
 2. ~~Push the project to GitHub~~
@@ -86,11 +86,11 @@ todo list
 ### ✔️ Mark as Done
 Marks an existing task as completed.  
 
-###Command:
+**Command**:
 ```bash
 todo done "<task to mark as done>"
 ```
-###Example:
+**Example**:
 ```bash
 todo done "Create a README file for my project"
 ```
@@ -100,12 +100,12 @@ todo done "Create a README file for my project"
 ### ✏️ Edit a Task
 Edits the description of an existing task.  
 
-###Command:
+**Command**:
 ```bash
 todo edit "<old task description>" "<new task description>"
 ```
 
-###Example:
+**Example**:
 ```bash
 todo edit "Create a README file" "Create a beautiful README file"
 ```
@@ -117,12 +117,12 @@ Removes tasks from your list. This command is very flexible and has several opti
 
 Remove a specific task:
 
-###Command:
+**Command**:
 ```bash
 todo remove "<task to remove>"
 ```
 
-###Example:
+**Example**:
 ```bash
 todo remove "Old task I don't need"
 ```
@@ -132,7 +132,7 @@ todo remove "Old task I don't need"
 Remove all **completed tasks**:
 Use the ```-d``` or ```--done``` flag to clean up your list by removing all completed tasks
 
-###Command:
+**Command**:
 ```bash
 todo remove -d
 ```
