@@ -45,7 +45,6 @@ program.command('add')
     .action((str) => {
         let contents = loadTasks();
         contents.push({task: str, status: true})
-        saveTasks(contents);
         console.log(chalk.green.bold('Task added to the list'));
         rearrange(contents);
     })
@@ -72,22 +71,51 @@ program.command('done')
 
 program.command('remove')
     .description('Remove a task from the list')
-    .argument('<string>', 'Task that needs to be removed')
-    .action((str) => {
-        const contents = loadTasks();
-        let found = false;
-        for(let i = 0; i < contents.length; i++) {
-            if (contents[i].task == str) {
-                contents.splice(i, 1);
-                found = true;
-                break;
+    .option('-d, --done', "Remove all the completed tasks")
+    .option("-a, --all", "Remove all the tasks from the list")
+    .argument('[string]', 'Task that needs to be removed')
+    .action((str, options) => {
+        if (options.done && options.all) {
+            console.log(chalk.red.bold("Error: Cannot use --done and --all flags together."));
+            return;
+        }
+
+        let contents = loadTasks();
+        let tasksChanged = false;
+
+        if (options.all) {
+            if (contents.length > 0) {
+                contents = [];
+                console.log(chalk.green.bold("Removed all tasks from the list."));
+                tasksChanged = true;
+            } else {
+                console.log(chalk.yellow("Task list is already empty."));
             }
+        } else if (options.done) {
+            const originalLength = contents.length;
+            contents = contents.filter(task => task.status === true);
+            if (originalLength === contents.length) {
+                console.log(chalk.yellow.bold("No completed tasks to remove."));
+            } else {
+                console.log(chalk.green.bold("Removed all the finished tasks."));
+                tasksChanged = true;
+            }
+        } else if (str) {
+            const initialLength = contents.length;
+            contents = contents.filter(task => task.task !== str);
+            if (contents.length === initialLength) {
+                console.log(chalk.red.bold("No such task found in the list."));
+            } else {
+                console.log(chalk.green.bold(`Task "${str}" removed.`));
+                tasksChanged = true;
+            }
+        } else {
+            console.log(chalk.yellow("Please specify a task to remove or use an option like -a or -d."));
         }
-        if (!found) {
-            console.log(chalk.red.bold("No such task found in the list"));
+        if (tasksChanged) {
+            saveTasks(contents);
         }
-        saveTasks(contents);
-    })
+    });
 
 
 
@@ -112,11 +140,15 @@ program.command('list')
     .description('List all the tasks in the todo list')
     .action((str, options) => {
         let contents = loadTasks();
-        for(let i = 0; i < contents.length; i++){
-            if(contents[i].status == true) {
-                console.log(`${i + 1}. ${contents[i].task}`)
-            } else {
-                console.log(`${i + 1}. ${chalk.dim.strikethrough(contents[i].task)}`)
+        if (contents.length == 0) {
+            console.log(chalk.green.bold("You don't have any tasks in the list"))
+        } else {
+            for(let i = 0; i < contents.length; i++){
+                if(contents[i].status == true) {
+                    console.log(`${i + 1}. ${contents[i].task}`)
+                } else {
+                    console.log(`${i + 1}. ${chalk.dim.strikethrough(contents[i].task)}`)
+                }
             }
         }
     });
