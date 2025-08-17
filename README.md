@@ -64,9 +64,9 @@ Remove all **completed tasks**:
 
 
 Remove **all tasks** (careful!):
-todo remove -a
+```todo remove -a```
 or
-todo remove --all
+```todo remove --all```
 
 
 ---
